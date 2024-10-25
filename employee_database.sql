@@ -56,3 +56,4 @@ CREATE TABLE IF NOT EXISTS titles (
     FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
 );
 
+

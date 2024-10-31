@@ -1,0 +1,45 @@
+titles
+-
+title_id VARCHAR PK
+title VARCHAR
+
+employees
+-
+emp_no INT PK
+emp_title_id VARCHAR FK - titles.title_id
+birth_date DATE
+first_name VARCHAR
+last_name VARCHAR
+sex VARCHAR
+hire_date DATE
+
+departments
+-
+dept_no VARCHAR PK
+dept_name VARCHAR
+
+dept_manager
+-
+emp_no INT PK FK - employees.emp_no
+dept_no VARCHAR PK FK - departments.dept_no
+
+dept_emp
+-
+emp_no INT PK FK - employees.emp_no
+dept_no VARCHAR PK FK - departments.dept_no
+
+salaries
+-
+emp_no INT PK FK - employees.emp_no
+salary INT
+
+
+import pandas as pd
+from sqlalchemy import create_engine
+
+# Set up connection (replace with your database credentials)
+engine = create_engine('mysql+pymysql://username:password@localhost/pewlett_hackard')
+
+# Load CSV into DataFrame and push to SQL
+employees_df = pd.read_csv('path_to_employees.csv')
+employees_df.to_sql('employees', con=engine, if_exists='append', index=False)
